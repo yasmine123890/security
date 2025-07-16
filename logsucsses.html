@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, black, purple);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .congrats-container {
+            max-width: 600px;
+            padding: 50px 30px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.75);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            transform: scale(0.9);
+            opacity: 0;
+            animation: fadeInScale 1s ease forwards 0.5s;
+        }
+
+        .congrats-container h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.2);
+            animation: slideIn 1.2s ease forwards;
+        }
+
+        .congrats-container p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #d3cce3;
+            animation: fadeIn 1.2s ease forwards 0.8s;
+        }
+
+        .home-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(45deg, #6a0dad, #b469ff);
+            border-radius: 50px;
+            transition: background 0.4s ease, transform 0.2s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        .home-btn:hover {
+            background: linear-gradient(45deg, #b469ff, #6a0dad);
+            transform: translateY(-5px);
+        }
+
+        .home-btn:active {
+            transform: translateY(2px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="congrats-container">
+        <h1> Congratulations! </h1>
+        <p>You have successfully logged into our website.</p>
+        <a href="./homepage.html" class="home-btn">Go to Homepage</a>
+    </div>
+</body>
+</html>

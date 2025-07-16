@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <style>
+        /* Reset default margins and paddings */
+        body, h1, p, div, a {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #5e2b8f, #1a1a1a); /* Purple to dark gray gradient */
+            color: white;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+
+        .success-message {
+            background-color: #5e2b8f; /* Lighter purple */
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 22px;
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.4s ease-out forwards;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #fff;
+            color: #5e2b8f;
+            padding: 12px 24px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.6s ease-out forwards;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #5e2b8f;
+            color: #fff;
+        }
+
+        /* Animation for fade in and slide up effect */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media query for smaller devices */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .success-message {
+                font-size: 18px;
+                padding: 15px;
+            }
+
+            a {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+        @keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <h1>Order Confirmation</h1>
+    <p>Your order has been successfully placed!</p>
+    <div class="success-message">
+        <p>Thank you for your purchase! We are processing your order and will notify you shortly.</p>
+    </div>
+
+    <a href="./homepage.html">Go Back to Home</a>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berimbolo Security</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #f2f2f2;
+            height: 100vh;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            text-align: center; /* Center text */
+            background-color: #000; /* Fallback color */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1); /* Black with 100% opacity */
+        }
+        
+        video {
+            position: absolute; /* Position video absolutely */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Send video to back */
+            transform: translate(-50%, -50%); /* Center the video */
+            opacity: 0.5; /* Adjust opacity */
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            animation: slideIn 2s ease-out forwards; 
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Stack items vertically */
+            justify-content: center; /* Center items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards;
+        }
+
+        h1:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        h1:nth-child(2) {
+            animation-delay: 0.7s;
+        }
+
+        h1:nth-child(3) {
+            animation-delay: 0.9s;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInButtons 2s ease-out forwards;
+            animation-delay: 1s;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .buttons a {
+            display: inline-block;
+            padding: 12px 30px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 41, 128, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buttons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .buttons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 41, 128, 0.6);
+            background: transparent;
+        }
+
+        .buttons a:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInButtons {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        body.fade-out {
+            animation: fadeOut 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 15px;
+            }
+            .buttons a {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-left: 20px;
+                background-size: cover;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .buttons a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;">
+        <div class="video-overlay"></div>
+        <source src="./imges/08dece941cd36ad9d2090c83f88ff8e3.mp4" type="video/mp4">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/32b3fa1b-36d3-45fe-a18d-ef9bb758eee6.png" alt="Security background image">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <h1>Welcome &ndash; Your Safety, Our Mission!</h1>
+        <h1>Berimbolo Security</h1>
+        <h1>Security Website</h1>
+        <div class="buttons">
+            <a href="./loginpage.html">Log In</a>
+            <a href="./signuppage.html">Sign Up</a>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                document.body.classList.add('fade-out'); 
+                setTimeout(() => {
+                    window.location.href = link.href; 
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

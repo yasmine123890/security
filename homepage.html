@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Berimbolo Security</title>
+
+  <!-- Bootstrap + FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a002e;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.7) !important;
+      padding: 15px 20px;
+    }
+
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-size: 1rem;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #b469ff !important;
+    }
+
+    .navbar-toggler {
+      border-color: #fff;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,0.8%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero h2 {
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #d3cce3;
+    }
+
+    .why-choose-us {
+      background-color: #1a002e;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .why-choose-us h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: #fff;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .card {
+      background: linear-gradient(to bottom right, #ffffff, #7c1df1);
+      color: #240b36;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      padding: 40px 25px;
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+    }
+
+    .card-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-section {
+      background-color: #240b36;
+      padding: 80px 20px;
+    }
+
+    .testimonial-title {
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: #b469ff;
+      margin-bottom: 40px;
+    }
+
+    .testimonial-row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(to bottom right, #7c1df1, #b469ff);
+      color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      padding: 40px 25px;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      flex: 1;
+      max-width: 360px;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-10px) scale(1.05);
+    }
+
+    .testimonial-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 3px solid #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .testimonial-card:hover img {
+      transform: rotate(15deg);
+    }
+
+    footer {
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    #upBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      background-color: #7c1df1;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    #upBtn:hover {
+      background-color: #b469ff;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1, .hero h2 {
+        font-size: 2rem;
+      }
+      .hero-content {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top shadow-sm">
+  <div class="container-fluid justify-content-center">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCentered">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarCentered">
+      <ul class="navbar-nav text-center">
+        <li class="nav-item"><a class="nav-link fw-bold" href="./index.html"><i class="fas fa-door-open me-1"></i> WELCOMING</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold" href="./homepage.html"><i class="fas fa-home me-1"></i> HOME</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold" href="./about.html"><i class="fas fa-info-circle me-1"></i> ABOUT</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold" href="./menu.html"><i class="fas fa-list-alt me-1"></i> MENU</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold" href="./contact.html"><i class="fas fa-envelope me-1"></i> CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero fade-in">
+  <video autoplay muted loop playsinline>
+    <source src="./imges/08dece941cd36ad9d2090c83f88ff8e3.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="hero-content">
+    <h1 class="fade-in-up">Berimbolo Security</h1>
+    <h2 class="fade-in-up">Your Safety, Our Mission!</h2>
+  </div>
+</div>
+
+<!-- Why Choose Us -->
+<section class="why-choose-us fade-in-up">
+  <h2>Why Choose Us</h2>
+  <div class="container">
+    <div class="row">
+      <div class="card fade-in-up">
+        <div class="card-icon">🔒</div>
+        <h3>Advanced Security</h3>
+        <p>We offer state-of-the-art security technologies to keep you safe 24/7.</p>
+      </div>
+      <div class="card fade-in-up">
+        <div class="card-icon">⚙️</div>
+        <h3>Custom Solutions</h3>
+        <p>Get tailored security solutions to meet your unique needs and requirements.</p>
+      </div>
+      <div class="card fade-in-up">
+        <div class="card-icon">🕒</div>
+        <h3>24/7 Support</h3>
+        <p>Our dedicated support team is here for you anytime, anywhere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonial-section fade-in-up">
+  <div class="container">
+    <h2 class="testimonial-title">What Our Clients Say</h2>
+    <div class="testimonial-row">
+      <div class="testimonial-card">
+        <img src="./imges/test1.jpg" alt="Client Image">
+        <h5>John Doe</h5>
+        <p>"The service provided by this company was exceptional."</p>
+      </div>
+      <div class="testimonial-card">
+        <img src="./imges/test2.jpg" alt="Client Image">
+        <h5>Jane Smith</h5>
+        <p>"It’s a game-changer. Highly recommended!"</p>
+      </div>
+      <div class="testimonial-card">
+        <img src="./imges/test3.jpg" alt="Client Image">
+        <h5>Emily Johnson</h5>
+        <p>"Excellent support and top-notch products!"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  &copy; 2024 Berimbolo Security. All Rights Reserved.
+</footer>
+
+<!-- Up Button -->
+<button id="upBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+  ↑
+</button>
+
+<script>
+  // Show/hide up button
+  const upBtn = document.getElementById("upBtn");
+  window.onscroll = function () {
+    upBtn.style.display = window.scrollY > 400 ? "block" : "none";
+  };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

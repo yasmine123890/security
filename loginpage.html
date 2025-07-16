@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #240b36, #000000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .login-container {
+            background-color: #1a1a1a;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .login-container h1 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #fff;
+        }
+
+        label {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: block;
+            color: #ddd;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i.fa-user,
+        .input-wrapper i.fa-lock {
+            position: absolute;
+            left: 12px;
+            top: 35%;
+            transform: translateY(-50%);
+            color: #888;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 37%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 12px 40px 12px 40px;
+            margin-bottom: 18px;
+            border: 2px solid #333;
+            border-radius: 6px;
+            background: #222;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s ease;
+            z-index: 0;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 10px rgba(106, 17, 203, 0.4);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #bbb;
+        }
+
+        .login-container button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            background: #6a11cb;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 8px 25px rgba(106, 17, 203, 0.4);
+        }
+
+        .login-container button:hover {
+            background: #5b09b3;
+            transform: translateY(-3px);
+        }
+
+        .login-container button:active {
+            transform: translateY(2px);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        .signup-link a {
+            color: #6a11cb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .signup-link a:hover {
+            color: #5b09b3;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+            }
+
+            .login-container h1 {
+                font-size: 1.6rem;
+            }
+
+            .login-container button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h1>Login</h1>
+    <form id="login-form" onsubmit="return handleLogin(event)">
+        <label for="username">Username or Email</label>
+        <div class="input-wrapper">
+            <i class="fas fa-user"></i>
+            <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
+        </div>
+        <div id="username-error" class="error-message"></div>
+
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <i class="fas fa-eye toggle-eye" onclick="togglePassword('password', this)"></i>
+        </div>
+        <div id="password-error" class="error-message"></div>
+
+        <button type="submit">Login</button>
+    </form>
+    <div class="signup-link">
+        Don't have an account? <a href="signuppage.html">Sign Up</a>
+    </div>
+</div>
+
+<script>
+    function validateLoginForm() {
+        let valid = true;
+        document.getElementById("username-error").textContent = '';
+        document.getElementById("password-error").textContent = '';
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username.trim() === '') {
+            document.getElementById('username-error').textContent = 'Username or email is required.';
+            valid = false;
+        }
+
+        if (password.trim() === '') {
+            document.getElementById('password-error').textContent = 'Password is required.';
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    function togglePassword(id, icon) {
+        const input = document.getElementById(id);
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        icon.classList.toggle('fa-eye');
+        icon.classList.toggle('fa-eye-slash');
+    }
+
+    function handleLogin(event) {
+        event.preventDefault();
+        if (validateLoginForm()) {
+            window.location.href = 'logsucsses.html';
+        }
+    }
+</script>
+</body>
+</html>
